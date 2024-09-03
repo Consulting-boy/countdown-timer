@@ -1,22 +1,28 @@
-const countdown = () => {
-    const countDate = new Date("June 10, 2024 00:00:00").getTime();
-    const now = new Date().getTime();
-    const gap = countDate - now;
+// Устанавливаем дату, до которой идет отсчет
+const countdownDate = new Date("October 2, 2024 00:00:00").getTime();
 
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
+// Обновляем отсчет каждую секунду
+const countdownFunction = setInterval(function() {
 
-    const textDay = Math.floor(gap / day);
-    const textHour = Math.floor((gap % day) / hour);
-    const textMinute = Math.floor((gap % hour) / minute);
-    const textSecond = Math.floor((gap % minute) / second);
+  // Получаем текущие дату и время
+  const now = new Date().getTime();
 
-    document.getElementById("days").innerText = textDay;
-    document.getElementById("hours").innerText = textHour;
-    document.getElementById("minutes").innerText = textMinute;
-    document.getElementById("seconds").innerText = textSecond;
-};
+  // Вычисляем разницу между текущим временем и временем окончания
+  const distance = countdownDate - now;
 
-setInterval(countdown, 1000);
+  // Вычисляем дни, часы, минуты и секунды
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Выводим результат в элемент с id="countdown"
+  document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // Если отсчет завершен, выводим текст
+  if (distance < 0) {
+    clearInterval(countdownFunction);
+    document.getElementById("countdown").innerHTML = "Отсчет завершен!";
+  }
+}, 1000);

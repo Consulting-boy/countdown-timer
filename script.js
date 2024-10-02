@@ -1,5 +1,5 @@
 // Устанавливаем дату, до которой идет отсчет
-const countdownDate = new Date("October 2, 2024 00:00:00").getTime();
+const countdownDate = new Date("October 15, 2024 13:00:00").getTime();
 
 // Обновляем отсчет каждую секунду
 const countdownFunction = setInterval(function() {
